@@ -1,0 +1,85 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+    id 'stringfog'
+    id 'kotlin-kapt'
+
+}
+import com.github.megatronking.stringfog.plugin.kg.RandomKeyGenerator
+import com.github.megatronking.stringfog.plugin.StringFogMode
+
+stringfog {
+    implementation 'com.github.megatronking.stringfog.xor.StringFogImpl'
+    enable true
+    kg new RandomKeyGenerator()
+    mode StringFogMode.base64
+}
+android {
+    namespace 'com.secure.net.vpn'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.secure.net.vpn"
+        minSdk 26
+        targetSdk 33
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    dataBinding {
+        enabled = true
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+    kapt {
+        generateStubs = true
+    }
+}
+
+dependencies {
+    implementation 'com.facebook.android:facebook-android-sdk:12.3.0'
+    implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'com.afollestad.material-dialogs:core:3.3.0'
+    implementation 'com.afollestad.material-dialogs:lifecycle:3.3.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation "androidx.activity:activity-ktx:1.3.0"
+
+    implementation 'com.facebook.android:facebook-android-sdk:12.3.0'
+    implementation 'com.airbnb.android:lottie:6.3.0'
+    implementation project(':core')
+    implementation 'com.tencent:mmkv:1.3.0'
+    implementation 'com.github.megatronking.stringfog:xor:4.0.1'
+
+}
