@@ -45,7 +45,7 @@ fun Project.setupCommon() {
             informational += "MissingTranslation"
         }
         (this as ExtensionAware).extensions.getByName<KotlinJvmOptions>("kotlinOptions").jvmTarget =
-                javaVersion.toString()
+            javaVersion.toString()
     }
 
     dependencies {
