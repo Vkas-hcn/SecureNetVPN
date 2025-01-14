@@ -19,7 +19,6 @@ object SecureUtils {
     fun getVpnNetData() {
         getTbaList("requ")
         val date = System.currentTimeMillis()
-
         getServiceData(
             DataUtils.vpn_service_url,
             onSuccess = {
